@@ -13,7 +13,7 @@ using System.Collections.Generic;
 class Hospital
 {
 
-    interface IDoctor
+    interface IDoctor //IComponent 
     {
         string makeConsultation();
         bool addTestToDo(string test);
@@ -23,7 +23,7 @@ class Hospital
 
     }
 
-    class Doctor : IDoctor
+    class Doctor : IDoctor // class Component : IComponent
     {
         public string makeConsultation()
         {
@@ -48,7 +48,7 @@ class Hospital
 
     }
 
-    class DentistDecorator : IDoctor
+    class DentistDecorator : IDoctor //class DecoratorA : IComponent
     {
         IDoctor doctor;
         public Dictionary<string, string> tests = new Dictionary<string, string>();
@@ -81,7 +81,10 @@ class Hospital
         }
         public void showResult()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("RESULT:");
+            Console.ResetColor();
+        
             if (tests.Count != 0)
             {
                 Console.WriteLine("You passed those tests and got those results: ");
@@ -96,7 +99,7 @@ class Hospital
         }
     }
 
-    class SurgeonDecorator : IDoctor
+    class SurgeonDecorator : IDoctor //class DecoratorB : IComponent
     {
         IDoctor doctor;
         string state = "healthy";
@@ -140,7 +143,9 @@ class Hospital
         }
         public void showResult()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("RESULT:");
+            Console.ResetColor();
             if (tests.Count != 0)
             {
                 Console.WriteLine("You passed those tests and got those results: ");
@@ -155,7 +160,7 @@ class Hospital
         }
     }
 
-    class OrthopedistDecorator : IDoctor
+    class OrthopedistDecorator : IDoctor //class DecoratorС : IComponent
     {
         IDoctor doctor;
         string state = "healthy";
@@ -199,7 +204,9 @@ class Hospital
         }
         public void showResult()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("RESULT:");
+            Console.ResetColor();
             if (tests.Count != 0)
             {
                 Console.WriteLine("You passed those tests and got those results: ");
@@ -219,30 +226,38 @@ class Hospital
         static void Main()
         {
             IDoctor doctor = new Doctor();
+            List<IDoctor> doctors = new List<IDoctor>();
+            doctors.Add(new DentistDecorator(doctor));
+            doctors.Add(new SurgeonDecorator(doctor));
+            doctors.Add(new OrthopedistDecorator(doctor));
+            foreach(IDoctor dc in doctors) {
+                Console.WriteLine("");
+                Console.WriteLine(dc.makeConsultation());
 
-            doctor = new DentistDecorator(doctor);
-            doctor.makeConsultation();
-            doctor.addTestToDo("blood test");
-            doctor.addTestToDo("teeth shot");
-            doctor.showResult();
+                dc.addTestToDo("blood test");
+                dc.addTestToDo("Analysis of urine");
+                dc.addTestResult("blood test", "good");
+                dc.addTestResult("Analysis of urine", "good");
+                dc.showResult();
+            }
 
             
-            doctor = new SurgeonDecorator(doctor);
-            Console.WriteLine("");
-            doctor.makeConsultation();
-            doctor.addTestToDo("blood test");
-            doctor.addTestToDo("teeth shot");
-            doctor.showResult();
+            // doctor = new SurgeonDecorator(doctor);
+            // Console.WriteLine("");
+            // doctor.makeConsultation();
+            // doctor.addTestToDo("blood test");
+            // doctor.addTestToDo("teeth shot");
+            // doctor.showResult();
 
 
-            doctor = new OrthopedistDecorator(doctor);
-            Console.WriteLine("");
-            Console.WriteLine(doctor.makeConsultation());
-            doctor.addTestToDo("Ultrasound of the joints");
-            doctor.addTestToDo("massage");
-            doctor.addTestResult("massage", "good");
-            doctor.addTestResult("Ultrasound of the joints", "bad");
-            doctor.showResult();
+            // doctor = new OrthopedistDecorator(doctor);
+            // Console.WriteLine("");
+            // Console.WriteLine(doctor.makeConsultation());
+            // doctor.addTestToDo("Ultrasound of the joints");
+            // doctor.addTestToDo("massage");
+            // doctor.addTestResult("massage", "good");
+            // doctor.addTestResult("Ultrasound of the joints", "bad");
+            // doctor.showResult();
 
             Console.ReadKey();
         }
