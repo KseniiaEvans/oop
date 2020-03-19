@@ -15,22 +15,22 @@ namespace NewYear
             GiftsWorld world;
             
             world = new GiftsWorld(santa);
-            world.RunFoodChain();
+            world.MadeNewYearRresent();
 
             world = new GiftsWorld(snow_maiden);
-            world.RunFoodChain();
+            world.MadeNewYearRresent();
 
             world = new GiftsWorld(santa);
-            world.RunFoodChain();
+            world.MadeNewYearRresent();
 
             world = new GiftsWorld(snow_maiden);
-            world.RunFoodChain();
+            world.MadeNewYearRresent();
 
             world = new GiftsWorld(santa);
-            world.RunFoodChain();
+            world.MadeNewYearRresent();
 
             world = new GiftsWorld(snow_maiden);
-            world.RunFoodChain();
+            world.MadeNewYearRresent();
 
             RandomSingleton.PrintCount();
             Console.WriteLine("\n");
@@ -105,7 +105,6 @@ namespace NewYear
     
     abstract class Candies // The 'AbstractProductB' abstract class
     {
-
         public abstract void Display();
     }
 
@@ -186,7 +185,7 @@ namespace NewYear
             _toys = factory.CreateToys();
             _candies = factory.CreateCandies();
         }
-        public void RunFoodChain()
+        public void MadeNewYearRresent()
         {
             // Console.OutputEncoding = System.Text.Encoding.Unicode;
             Console.Write("NewYear present for ");
