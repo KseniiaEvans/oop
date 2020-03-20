@@ -12,15 +12,15 @@ namespace Product
             
             ContextFood meat = new ContextFood();
             meat.SetState(ContextFood.FoodStateSetting.Harmful);
-            meat.Consume();
+            meat.Сonsume();
 
             ContextFood fish = new ContextFood();
             fish.SetState(ContextFood.FoodStateSetting.Useful);
-            fish.Consume();
+            fish.Сonsume();
 
             ContextFood cheese = new ContextFood();
             cheese.SetState(ContextFood.FoodStateSetting.Harmful);
-            cheese.Consume();
+            cheese.Сonsume();
         }
     }
     abstract class State
@@ -80,6 +80,7 @@ namespace Product
         public void Сonsume()
         {
             CurrentState.Сonsume();
+            Console.WriteLine("------------------");
         }
     }
     
