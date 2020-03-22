@@ -6,6 +6,7 @@
 *.user
 *.sln.docstates
 *.mmw
+*.txt
 
 # Build results
 
